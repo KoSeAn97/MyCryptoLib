@@ -3,6 +3,8 @@
 #include <functional>
 #include <iostream>
 
+
+/*----------------------- Cipher Feed Back Mode ------------------------------*/
 template <typename CipherType>
 CFB_Mode<CipherType>::CFB_Mode(const CipherType & alg, const ByteBlock & init_vec) :
     algorithm(alg), iv(init_vec.deep_copy())
@@ -106,4 +108,32 @@ void CFB_Mode<CipherType>::parallel_decrypt(const ByteBlock & src, ByteBlock & d
     for(auto & t : threads) t.join();
 
     dst = join_blocks(results);
+}
+
+
+/*------------------------- Output Feed Back Mode ----------------------------*/
+template <typename CipherType>
+OFB_Mode<CipherType>::OFB_Mode(const CipherType & alg, const ByteBlock & init_vec) :
+    algorithm(alg), iv(init_vec.deep_copy())
+{
+    // nothing
+}
+
+template <typename CipherType>
+void OCB_Mode<CipherType>::encrypt(const ByteBlock & src, ByteBlock & dst) const {
+    auto blocks = split_blocks(src, CipherType::block_lenght);
+	ByteBlock tmp;
+
+	algorithm.encrypt(iv_, tmp);
+	xor_blocks(blocks[0], blocks[0], tmp);
+	for(int i = 1; i < blocks.size(); i++) {
+		algorithm.encrypt(tmp, tmp);
+		xor_blocks(blocks[i], blocks[i], tmp);
+	}
+	dst = join_blocks(blocks);
+}
+
+template <typename CipherType>
+void OFB_Mode<CipherType>::decrypt(const ByteBlock & src, ByteBlock & dst) const {
+	encrypt(src, dst, iv);
 }

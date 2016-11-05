@@ -91,6 +91,17 @@ public:
 	void parallel_decrypt(const ByteBlock & src, ByteBlock & dst) const;
 };
 
+template <typename CipherType>
+class OFB_Mode {
+	const CipherType algorithm;
+	const ByteBlock iv;
+
+public:
+	OFB_Mode(const CipherType & alg, const ByteBlock & iniv_vec);
+	void encrypt(const ByteBlock & src, ByteBlock & dst) const;
+	void decrypt(const ByteBlock & src, ByteBLock & dst) const;
+}
+
 // Implementations of modes of encryption
 #include "modes.hpp"
 
