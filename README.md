@@ -1,13 +1,18 @@
-# Encryptor With Kuznyechik
-Реализованы:
-* Алгоритм блочного шифрования Kuznyechik с длиной блока 128 бит и длиной ключа 256 бит
-* Режим шифрования Cipher Feedback и Output Feedback
+# MyCryptoLib
 
-Планируется реализовать
-* Алгоритм блочного шифрования AES-256
+#### Реализованы:
+*Алгоритм блочного шифрования:*
+* Kuznyechik
+* Rijndael: AES128, AES192, AES256
+
+*Режим шифрования:*
+* Cipher Feedback mode
+* Output Feedback mode
+* Electronic Codebook mode
+
 
 ## Пример запуска тестовой программы
     make all
-    ./program -P path-to-src.txt -D path-to-dst.txt -e
+    ./build/program -P path-to-src.txt -D path-to-dst.txt -e
 ## Вызов справки
-    ./program --help
+    ./build/program --help

@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <functional>
 #include <iostream>
-
+#include <stdexcept>
 
 /*----------------------- Cipher Feed Back Mode ------------------------------*/
 template <typename CipherType>
@@ -120,11 +120,11 @@ OFB_Mode<CipherType>::OFB_Mode(const CipherType & alg, const ByteBlock & init_ve
 }
 
 template <typename CipherType>
-void OCB_Mode<CipherType>::encrypt(const ByteBlock & src, ByteBlock & dst) const {
+void OFB_Mode<CipherType>::encrypt(const ByteBlock & src, ByteBlock & dst) const {
     auto blocks = split_blocks(src, CipherType::block_lenght);
 	ByteBlock tmp;
 
-	algorithm.encrypt(iv_, tmp);
+	algorithm.encrypt(iv, tmp);
 	xor_blocks(blocks[0], blocks[0], tmp);
 	for(int i = 1; i < blocks.size(); i++) {
 		algorithm.encrypt(tmp, tmp);
@@ -136,4 +136,31 @@ void OCB_Mode<CipherType>::encrypt(const ByteBlock & src, ByteBlock & dst) const
 template <typename CipherType>
 void OFB_Mode<CipherType>::decrypt(const ByteBlock & src, ByteBlock & dst) const {
 	encrypt(src, dst, iv);
+}
+
+/*------------------------- Electronic Code Book Mode ----------------------------*/
+template <typename CipherType>
+ECB_Mode<CipherType>::ECB_Mode(const CipherType & alg) : algorithm(alg)
+{
+    // nothing
+}
+
+template <typename CipherType>
+void ECB_Mode<CipherType>::encrypt(const ByteBlock & src, ByteBlock & dst) const {
+    if( src.size() % CipherType::block_lenght )
+        throw std::invalid_argument("Msg must be partible on block_lenght");
+
+	auto blocks = split_blocks(src, CipherType::block_lenght);
+    for(auto & block : blocks) algorithm.encrypt(block, block);
+    dst = join_blocks(blocks);
+}
+
+template <typename CipherType>
+void ECB_Mode<CipherType>::decrypt(const ByteBlock & src, ByteBlock & dst) const {
+    if( src.size() % CipherType::block_lenght )
+        throw std::invalid_argument("Msg must be partible on block_lenght");
+
+    auto blocks = split_blocks(src, CipherType::block_lenght);
+    for(auto & block : blocks) algorithm.decrypt(block, block);
+    dst = join_blocks(blocks);
 }

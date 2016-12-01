@@ -99,8 +99,18 @@ class OFB_Mode {
 public:
 	OFB_Mode(const CipherType & alg, const ByteBlock & iniv_vec);
 	void encrypt(const ByteBlock & src, ByteBlock & dst) const;
-	void decrypt(const ByteBlock & src, ByteBLock & dst) const;
-}
+	void decrypt(const ByteBlock & src, ByteBlock & dst) const;
+};
+
+template <typename CipherType>
+class ECB_Mode {
+	const CipherType algorithm;
+
+public:
+	ECB_Mode(const CipherType & alg);
+	void encrypt(const ByteBlock & src, ByteBlock & dst) const;
+	void decrypt(const ByteBlock & src, ByteBlock & dst) const;
+};
 
 // Implementations of modes of encryption
 #include "modes.hpp"

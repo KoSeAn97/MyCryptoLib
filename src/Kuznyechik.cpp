@@ -70,7 +70,7 @@ void linear_transform_direct128(BYTE * target);
 void linear_transform_inverse128(BYTE * target);
 void iteration_linear_transform_direct128(BYTE * target);
 void iteration_linear_transform_inverse128(BYTE * target);
-void encrypt128(BYTE * target, const vector<ByteBlock> & keys);
+static void encrypt128(BYTE * target, const vector<ByteBlock> & keys);
 void decrypt128(BYTE * target, const vector<ByteBlock> & keys);
 void keys_transform128(BYTE * k1, BYTE * k2, int iconst);
 void key_derivation128(BYTE * k1, BYTE * k2, BYTE * k3, BYTE * k4, int ipair);
@@ -201,7 +201,7 @@ void iteration_linear_transform_inverse128(BYTE * target) {
         linear_transform_inverse128(target);
 }
 
-void encrypt128(BYTE * target, const vector<ByteBlock> & keys) {
+static void encrypt128(BYTE * target, const vector<ByteBlock> & keys) {
 	xor128(target, target, keys[0].byte_ptr());
 	for(int i = 1; i < 10; i++) {
 		nonlinear_transform_direct128(target);

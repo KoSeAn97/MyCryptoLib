@@ -21,6 +21,7 @@ using std::numeric_limits;
 using namespace CommandLineProcessing;
 
 #include "Kuznyechik.hpp"
+#include "Rijndael.hpp"
 #include "mycrypto.hpp"
 
 vector<string> split(const string & s, char ch) {
@@ -115,7 +116,6 @@ int main(int argc, char ** argv) {
 		ByteBlock output;
 
 		CFB_Mode<Kuznyechik> encryptor(Kuznyechik(key), iv);
-
 
 		if(cmd.foundOption("encrypt")) {
 			encryptor.encrypt(message, output);

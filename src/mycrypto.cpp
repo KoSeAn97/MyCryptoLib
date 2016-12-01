@@ -84,14 +84,18 @@ void ByteBlock::reset(const BYTE * pBlocks_, size_t size_) {
         memset(pBlocks, 0, amount_of_bytes);
         delete [] pBlocks;
     }
-    if(size_ && pBlocks_) {
-        pBlocks = new BYTE [size_];
-        memcpy(pBlocks, pBlocks_, size_);
-        amount_of_bytes = size_;
-    } else  {
+
+    if( !size_ ) {
         pBlocks = nullptr;
         amount_of_bytes = 0;
+        return;
     }
+
+    pBlocks = new BYTE [size_];
+    amount_of_bytes = size_;
+
+    if( pBlocks_ ) memcpy(pBlocks, pBlocks_, size_);
+    else memset(pBlocks, 0, size_);
 }
 
 size_t ByteBlock::size() const {
@@ -119,8 +123,8 @@ void swap(ByteBlock & lhs, ByteBlock & rhs) {
 
 vector<ByteBlock> split_blocks(const ByteBlock & src, size_t length) {
     vector<ByteBlock> tmp;
-    int amount = src.size() / length;
-    int tail = src.size() % length;
+    size_t amount = src.size() / length;
+    size_t tail = src.size() % length;
     for(int i = 0; i < amount; i++)
         tmp.push_back(src(i * length, length));
     if(tail)
@@ -185,7 +189,7 @@ string hex_representation(const ByteBlock & bb) {
 }
 ByteBlock hex_to_bytes(const string & s) {
     if(s.size() % 2) throw std::invalid_argument("length of hex-string must be even number");
-    int size = s.size() / 2;
+    size_t size = s.size() / 2;
 
     ByteBlock result(size);
     for(int i = 0; i < size; i++) {
