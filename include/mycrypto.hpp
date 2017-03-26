@@ -1,6 +1,8 @@
 #include <string>
 using std::string;
 
+#include <vector>
+
 #ifndef __MYCRYPTO__
 #define __MYCRYPTO__
 

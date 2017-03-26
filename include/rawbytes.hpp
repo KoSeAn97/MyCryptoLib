@@ -14,6 +14,7 @@ namespace raw_bytes {  // namespace begining
 typedef uint8_t byte;     // considered to be  8 bits length
 typedef uint16_t word;    // considered to be 16 bits length
 typedef uint32_t dword;
+typedef uint64_t qword;
 
 // it'll xor n_bytes relevant lhs's ans rhs's bytes and place result at dst
 void xor_n(byte * dst, const byte * lhs, const byte * rhs, unsigned int n_bytes);
