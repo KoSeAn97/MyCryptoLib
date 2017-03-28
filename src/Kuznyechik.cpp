@@ -11,10 +11,7 @@ using std::vector;
 #include <map>
 using std::map;
 
-#include <iostream>
 #include <cstring>
-using std::cerr;
-using std::endl;
 
 #include "Kuznyechik.hpp"
 #include "mycrypto.hpp"

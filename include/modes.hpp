@@ -1,7 +1,6 @@
 #include <thread>
 #include <algorithm>
 #include <functional>
-#include <iostream>
 #include <stdexcept>
 
 /*----------------------- Cipher Feed Back Mode ------------------------------*/
@@ -75,8 +74,6 @@ void CFB_Mode<CipherType>::parallel_decrypt(const ByteBlock & src, ByteBlock & d
         decrypt(src, dst);
         return;
     }
-
-    //std::cerr << "Running " << num_threads << " threads." << endl;
 
     unsigned long const block_size = (length / num_threads) * CipherType::block_lenght;
     std::vector<ByteBlock> init_vectors(num_threads);

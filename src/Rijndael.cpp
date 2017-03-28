@@ -1,7 +1,3 @@
-#include <iostream>
-using std::cerr;
-using std::endl;
-
 #include <vector>
 using std::vector;
 
@@ -157,11 +153,6 @@ void Rijndael<Nk, Nb, Nr>::encrypt(const ByteBlock & src, ByteBlock & dst) const
     add_round_key<Nb>(target, round_keys[Nr].byte_ptr());
 }
 
-void show(const byte * p_) {
-	byte * p = const_cast<byte *>(p_);
-	cerr << hex_representation(ByteBlock(p, 16)) << endl;
-}
-
 template <uint Nk, uint Nb, uint Nr>
 void Rijndael<Nk, Nb, Nr>::decrypt(const ByteBlock & src, ByteBlock & dst) const {
 	if(src.size() != Nb * DWORD) throw std::invalid_argument("Invalid msg length");
@@ -169,25 +160,16 @@ void Rijndael<Nk, Nb, Nr>::decrypt(const ByteBlock & src, ByteBlock & dst) const
     if(dst != src) dst = src.deep_copy();
     byte * target = dst.byte_ptr();
 
-	show(target);
 	add_round_key<Nb>(target, round_keys[Nr].byte_ptr());
-	show(target);
 	for(int i = Nr - 1; i > 0; i--) {
 		inv_shift_rows<Nb>(target);
-		show(target);
 		inv_sub_bytes<Nb>(target);
-		show(target);
 		add_round_key<Nb>(target, round_keys[i].byte_ptr());
-		show(target);
 		inv_mix_columns<Nb>(target);
-		show(target);
 	}
 	inv_shift_rows<Nb>(target);
-	show(target);
 	inv_sub_bytes<Nb>(target);
-	show(target);
 	add_round_key<Nb>(target, round_keys[0].byte_ptr());
-	show(target);
 }
 
 

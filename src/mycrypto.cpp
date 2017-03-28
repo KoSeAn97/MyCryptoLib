@@ -7,10 +7,6 @@ using std::stringstream;
 using std::string;
 using std::getline;
 
-#include <iostream>
-using std::cerr;
-using std::endl;
-
 #include <vector>
 using std::vector;
 

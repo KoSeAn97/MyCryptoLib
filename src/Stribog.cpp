@@ -14,7 +14,7 @@ inline void tranform_composition(byte * target, byte const * mask);
 void substitution_transformation(byte * __restrict target);
 void permutation_transformation(byte * __restrict target);
 void linear_transformation_core(byte * __restrict target);
-void xor_transformation(byte * __restrict target, byte const __restrict * mask);
+void xor_transformation(byte * target __restrict, byte const * __restrict mask);
 // -------------------- Other Transformations ------------------------------- //
 void padding(byte * __restrict dst, byte const * __restrict src, unsigned len);
 void squared_add(byte * dst, byte const * lhs, byte const * rhs);

@@ -1,3 +1,7 @@
+# Google Test
+extern
+build
+
 ### C++ ###
 # Prerequisites
 *.d
