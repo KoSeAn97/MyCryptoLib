@@ -6,6 +6,7 @@
 
 **Криптографическая хэш-функция:**
 * Stribog256, Stribog512
+* SHA256
 
 **Режим шифрования:**
 * Cipher Feedback mode

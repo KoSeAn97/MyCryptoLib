@@ -63,6 +63,8 @@ public:
 
 	// Changes values between two ByteBlock-s
 	friend void swap(ByteBlock & lhs, ByteBlock & rhs);
+	// Check if two ByteBlock have equivalent content
+	friend bool equal(ByteBlock const & lhs, ByteBlock const & rhs);
 };
 
 // Some functions which will be useful for implementation of encryption algorithms
@@ -73,6 +75,7 @@ void xor_blocks(ByteBlock & to_assign, const ByteBlock & lhs, const ByteBlock & 
 // Some I/O functions to work with hex representation of ByteBlock
 string hex_representation(const ByteBlock & bb);
 ByteBlock hex_to_bytes(const string & s);
+ByteBlock hex_to_bytes(char const * s, unsigned length);
 
 // Template class that provides implementation of Cipher Feadback mode
 // of operation with any block cipher (algorithm) which saticfy several

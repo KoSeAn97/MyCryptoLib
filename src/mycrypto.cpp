@@ -117,6 +117,17 @@ void swap(ByteBlock & lhs, ByteBlock & rhs) {
     rhs.amount_of_bytes = s;
 }
 
+bool equal(ByteBlock const & lhs, ByteBlock const & rhs) {
+    auto size = lhs.amount_of_bytes;
+    if (size != rhs.amount_of_bytes)
+        return false;
+    for (unsigned i = 0; i < size; i++) if(lhs.pBlocks[i] != rhs.pBlocks[i])
+        return false;
+
+    return true;
+}
+
+
 vector<ByteBlock> split_blocks(const ByteBlock & src, size_t length) {
     vector<ByteBlock> tmp;
     size_t amount = src.size() / length;
@@ -183,9 +194,11 @@ string hex_representation(const ByteBlock & bb) {
     getline(ss, result);
     return result;
 }
-ByteBlock hex_to_bytes(const string & s) {
-    if(s.size() % 2) throw std::invalid_argument("length of hex-string must be even number");
-    size_t size = s.size() / 2;
+
+ByteBlock hex_to_bytes(char const * s, unsigned length)
+{
+    if(length % 2) throw std::invalid_argument("length of hex-string must be even number");
+    size_t size = length / 2;
 
     ByteBlock result(size);
     for(int i = 0; i < size; i++) {
@@ -193,4 +206,8 @@ ByteBlock hex_to_bytes(const string & s) {
         result[i] += from_hex_literal(s[2 * i + 1]);
     }
     return result;
+}
+
+ByteBlock hex_to_bytes(const string & s) {
+    return hex_to_bytes(s.c_str(), s.size());
 }
