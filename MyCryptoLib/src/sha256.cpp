@@ -3,9 +3,9 @@
 #include <iostream>
 using std::cerr; using std::endl;
 
-#include "mycrypto.hpp"
-#include "sha256.hpp"
-#include "rawbytes.hpp"
+#include <MyCryptoLib/mycrypto.hpp>
+#include <MyCryptoLib/sha256.hpp>
+#include <MyCryptoLib/rawbytes.hpp>
 
 using namespace raw_bytes;
 

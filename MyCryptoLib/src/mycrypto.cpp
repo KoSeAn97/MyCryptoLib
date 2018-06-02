@@ -12,7 +12,7 @@ using std::vector;
 
 #include <cstring>
 
-#include "mycrypto.hpp"
+#include <MyCryptoLib/mycrypto.hpp>
 
 ByteBlock::ByteBlock(size_t size_, BYTE init_value) :
     amount_of_bytes(size_)

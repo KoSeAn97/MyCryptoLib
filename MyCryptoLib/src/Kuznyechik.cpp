@@ -13,8 +13,8 @@ using std::map;
 
 #include <cstring>
 
-#include "Kuznyechik.hpp"
-#include "mycrypto.hpp"
+#include <MyCryptoLib/Kuznyechik.hpp>
+#include <MyCryptoLib/mycrypto.hpp>
 
 bool Kuznyechik::is_init = false;
 

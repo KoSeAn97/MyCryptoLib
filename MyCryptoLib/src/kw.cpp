@@ -2,9 +2,9 @@
 #include <vector>
 #include <cstdio>
 
-#include "Rijndael.hpp"
-#include "mycrypto.hpp"
-#include "kw.hpp"
+#include <MyCryptoLib/Rijndael.hpp>
+#include <MyCryptoLib/mycrypto.hpp>
+#include <MyCryptoLib/kw.hpp>
 
 static const size_t HALFED_WCB = 8;
 static const size_t MIN_N_SEMIBLOCKS = 3;

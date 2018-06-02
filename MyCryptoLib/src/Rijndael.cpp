@@ -4,10 +4,10 @@ using std::vector;
 #include <stdexcept>
 #include <cstring>
 
-#include "rawbytes.hpp"
+#include <MyCryptoLib/rawbytes.hpp>
 using namespace raw_bytes;
 
-#include "Rijndael.hpp"
+#include <MyCryptoLib/Rijndael.hpp>
 
 static const word RIJNDAEL_MODULUS = 0x11B;
 

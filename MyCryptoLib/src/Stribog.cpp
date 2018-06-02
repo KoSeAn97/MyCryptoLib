@@ -1,10 +1,10 @@
-#include "mycrypto.hpp"
-#include "Stribog.hpp"
-#include "rawbytes.hpp"
+#include <MyCryptoLib/mycrypto.hpp>
+#include <MyCryptoLib/Stribog.hpp>
+#include <MyCryptoLib/rawbytes.hpp>
 using namespace raw_bytes;
 
 // ======================== Tables Of Constants ============================= //
-#include "StribogData.hpp"
+#include <MyCryptoLib/StribogData.hpp>
 
 // ============================= Functions ================================== //
 void hash_function(byte * dst, byte const * msg, unsigned msg_len, byte iv_value);

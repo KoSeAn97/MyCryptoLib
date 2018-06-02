@@ -4,7 +4,7 @@ using std::make_tuple;
 using std::pair;
 using std::make_pair;
 
-#include "rawbytes.hpp"
+#include <MyCryptoLib/rawbytes.hpp>
 using namespace raw_bytes;
 
 void raw_bytes::xor_n( byte * dst,

@@ -12,3 +12,6 @@
 * Cipher Feedback mode
 * Output Feedback mode
 * Electronic Codebook mode
+
+**Алгоритмы Key Wrap**
+* AES Key Wrap
